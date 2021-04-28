@@ -7,7 +7,7 @@ import org.junit.jupiter.params.provider.NullSource;
 
 import static ru.netology.Main.writeString;
 
-public class writeStringTest {
+public class WriteStringTest {
 
     @ParameterizedTest
     @NullSource

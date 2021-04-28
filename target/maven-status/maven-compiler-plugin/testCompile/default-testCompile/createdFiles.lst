@@ -1,4 +1,5 @@
-ru/netology/parseCSVTest.class
-ru/netology/MainTest.class
-ru/netology/writeStringTest.class
-ru/netology/listToJsonTest.class
+ru/netology/HamcrestTestsNew.class
+ru/netology/HamcrestTestsRewrited.class
+ru/netology/ListToJsonTest.class
+ru/netology/WriteStringTest.class
+ru/netology/ParseCSVTest.class

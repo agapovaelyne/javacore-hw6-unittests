@@ -10,19 +10,19 @@ import java.util.List;
 
 import static ru.netology.Main.parseCSV;
 
-public class parseCSVTest {
+public class ParseCSVTest {
 
     @Test
     public void parseCSVEmptyResult_test() throws CsvValidationException {
         String[] columnMapping = {"id", "firstName", "lastName", "country", "age"};
-        String fileName = "dataEmpty.csv";
+        String fileName = "src/test/sourses/dataEmpty.csv";
         List<Employee> result = parseCSV(columnMapping, fileName);
 
         Assertions.assertTrue(result.isEmpty());
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"dataNotExist.csv", "dataInvalid.csv"})
+    @ValueSource(strings = {"src/test/sourses/dataNotExist.csv", "src/test/sourses/dataInvalid.csv"})
     public void parseBadCSV_success(String fileName) throws CsvValidationException {
         String[] columnMapping = {"id", "firstName", "lastName", "country", "age"};
 

@@ -67,52 +67,58 @@ public class Main {
         }
     }
 
-    public static List<Employee> parseXML(String fileName) throws ParserConfigurationException, IOException, SAXException {
-        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-        DocumentBuilder builder = factory.newDocumentBuilder();
-        Document doc = builder.parse(new File(fileName));
-        NodeList employeeNodeList = doc.getDocumentElement().getElementsByTagName("employee");
-
+    public static List<Employee> parseXML(String fileName) {
         List<Employee> list = new ArrayList<>();
-        Employee employee;
-        long id = 0;
-        String firstName = null;
-        String lastName = null;
-        String country = null;
-        int age = 0;
+        try{
+            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder builder = factory.newDocumentBuilder();
+            Document doc = builder.parse(new File(fileName));
+            NodeList employeeNodeList = doc.getDocumentElement().getElementsByTagName("employee");
 
-        for (int i = 0; i < employeeNodeList.getLength(); i++) {
-            Node node = employeeNodeList.item(i);
-            if (node.getNodeType() == Node.ELEMENT_NODE) {
-                NodeList empElementNodeList = node.getChildNodes();
-                for (int j = 0; j < empElementNodeList.getLength(); j++) {
-                    Node empVarNode = empElementNodeList.item(j);
-                    if (empVarNode.getNodeType() == Node.ELEMENT_NODE) {
-                        String empVarName = empVarNode.getNodeName();
-                        String empVarValue = empVarNode.getTextContent();
-                        switch (empVarName) {
-                            case ("id"):
-                                id = Integer.parseInt(empVarValue);
-                                break;
-                            case ("firstName"):
-                                firstName = empVarValue;
-                                break;
-                            case ("lastName"):
-                                lastName = empVarValue;
-                                break;
-                            case ("country"):
-                                country = empVarValue;
-                                break;
-                            case ("age"):
-                                age = Integer.parseInt(empVarValue);
+            Employee employee;
+            long id = 0;
+            String firstName = null;
+            String lastName = null;
+            String country = null;
+            int age = 0;
+
+            for (int i = 0; i < employeeNodeList.getLength(); i++) {
+                Node node = employeeNodeList.item(i);
+                if (node.getNodeType() == Node.ELEMENT_NODE) {
+                    NodeList empElementNodeList = node.getChildNodes();
+                    for (int j = 0; j < empElementNodeList.getLength(); j++) {
+                        Node empVarNode = empElementNodeList.item(j);
+                        if (empVarNode.getNodeType() == Node.ELEMENT_NODE) {
+                            String empVarName = empVarNode.getNodeName();
+                            String empVarValue = empVarNode.getTextContent();
+                            switch (empVarName) {
+                                case ("id"):
+                                    id = Integer.parseInt(empVarValue);
+                                    break;
+                                case ("firstName"):
+                                    firstName = empVarValue;
+                                    break;
+                                case ("lastName"):
+                                    lastName = empVarValue;
+                                    break;
+                                case ("country"):
+                                    country = empVarValue;
+                                    break;
+                                case ("age"):
+                                    age = Integer.parseInt(empVarValue);
+                            }
                         }
                     }
+                    employee = new Employee(id, firstName, lastName, country, age);
+                    list.add(employee);
                 }
-                employee = new Employee(id, firstName, lastName, country, age);
-                list.add(employee);
             }
+            return list;
+        } catch (ParserConfigurationException | IOException | SAXException e) {
+            System.out.println(e.getMessage());
         }
         return list;
+
     }
 
     public static String readString(String fileName) {
@@ -129,15 +135,19 @@ public class Main {
         }
     }
 
-    public static List<Employee> jsonToList(String json) throws ParseException {
+    public static List<Employee> jsonToList(String json) {
         List<Employee> list = new ArrayList<>();
-        GsonBuilder builder = new GsonBuilder();
-        JSONParser parser = new JSONParser();
-        Gson gson = builder.create();
-        JSONArray employeeArray = (JSONArray) parser.parse(json);
-        for (Object jsonObject: employeeArray) {
-            Employee employee = gson.fromJson(jsonObject.toString(), Employee.class);
-            list.add(employee);
+        try{
+            GsonBuilder builder = new GsonBuilder();
+            JSONParser parser = new JSONParser();
+            Gson gson = builder.create();
+            JSONArray employeeArray = (JSONArray) parser.parse(json);
+            for (Object jsonObject: employeeArray) {
+                Employee employee = gson.fromJson(jsonObject.toString(), Employee.class);
+                list.add(employee);
+            }
+        } catch (ParseException e) {
+            System.out.println(e.getMessage());
         }
         return list;
     }

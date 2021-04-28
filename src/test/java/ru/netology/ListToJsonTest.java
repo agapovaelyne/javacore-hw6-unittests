@@ -9,7 +9,7 @@ import java.util.List;
 
 import static ru.netology.Main.listToJson;
 
-public class listToJsonTest {
+public class ListToJsonTest {
 
     @ParameterizedTest
     @EmptySource

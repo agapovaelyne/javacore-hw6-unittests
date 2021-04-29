@@ -43,7 +43,5 @@ public class ParseCSVTest {
                 () -> Assertions.assertFalse(result.isEmpty()),
                 () -> Assertions.assertNotNull(result.get(0).getId())
         );
-
-
     }
 }

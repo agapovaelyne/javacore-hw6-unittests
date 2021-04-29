@@ -16,7 +16,7 @@ import static org.hamcrest.Matchers.*;
 import static ru.netology.Main.listToJson;
 import static ru.netology.Main.parseCSV;
 
-public class HamcrestTestsRewrited {
+public class HamcrestRewritedTest {
 
     @Test
     public void parseCSVEmptyResult_HamcrestRewrited_test() throws CsvValidationException {

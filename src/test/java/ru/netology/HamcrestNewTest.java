@@ -11,7 +11,7 @@ import static org.hamcrest.Matchers.empty;
 import static ru.netology.Main.jsonToList;
 import static ru.netology.Main.parseXML;
 
-public class HamcrestTestsNew {
+public class HamcrestNewTest {
 
     @ParameterizedTest
     @ValueSource(strings = {"src/test/sourses/dataNotExist.xml", "src/test/sourses/dataInvalid1.xml", "src/test/sourses/dataInvalid2.xml","src/test/sourses/dataInvalid3.xml","src/test/sourses/dataEmpty.xml", "src/test/sourses/data.json"})
